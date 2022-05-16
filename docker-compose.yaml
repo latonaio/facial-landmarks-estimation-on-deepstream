@@ -1,0 +1,19 @@
+version: "3"
+services:
+  faciallandmarks-camera:
+    container_name: faciallandmarks-camera
+    privileged: yes
+    network_mode: host
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./:/app/mnt
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev:/dev
+    environment:
+      - DISPLAY
+      - CUDA_VER=10.2
+      - LD_LIBRARY_PATH=/opt/nvidia/deepstream/deepstream/lib/cvcore_libs
+    working_dir: /app/src
+    tty: true
