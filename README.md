@@ -10,6 +10,7 @@ facial-landmarks-estimator-on-deepstream は、DeepStream 上で FacialLandmarks
 
 ## FacialLandmarksEstimationについて
 FacialLandmarksEstimation は、画像内の顔の主なランドマークを検出し、顔の形状予測を行うAIモデルです。
+FacialLandmarksEstimation は、特徴抽出にRecombinator Networksを使用しています。
 
 ## 動作手順
 ### Dockerコンテナの起動
@@ -38,3 +39,7 @@ stream-start: ## ストリーミングを開始する
 
 ## engineファイルについて
 engineファイルである faciallandmarks.engine は、[facial-landmarks-estimator-on-tao-toolkit](https://github.com/latonaio/facial-landmarks-estimator-on-tao-toolkit)と共通のファイルであり、当該レポジトリで作成した engineファイルを、本リポジトリで使用しています。  
+
+## 演算について
+本レポジトリでは、ニューラルネットワークのモデルにおいて、エッジコンピューティング環境での演算スループット効率を高めるため、FP16(半精度浮動小数点)を使用しています。  
+浮動小数点値の変更は、Makefileの以下の部分を変更し、engineファイルを生成してください。
